@@ -1,0 +1,16 @@
+{
+  "type": "mongodb",
+  "url": "mongodb+srv://gusta:135792@cursojs.vtjjl.mongodb.net/MongoTypeorm?retryWrites=true&w=majority",
+  "useNewUrlParser": true,
+  "useUnifiedTopology": true,
+  "synchronize": true,
+  "writeConcern": {
+    "j": true
+  },
+  "ssl": true,
+  "entities": ["./src/modules/**/entities/*.ts"],
+  "migrations": ["./src/database/migrations/*.ts"],
+  "cli": {
+    "migrationsDir": "./src/database/migrations"
+  }
+}
