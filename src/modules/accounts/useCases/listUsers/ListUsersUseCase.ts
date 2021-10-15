@@ -4,8 +4,8 @@ import { UsersRepository } from '../../repositories/implementations/UsersReposit
 class ListUsersUseCase {
   constructor(private usersRepository: UsersRepository) {}
 
-  execute(): User[] {
-    const users = this.usersRepository.list();
+  async execute(): Promise<User[]> {
+    const users = await this.usersRepository.list();
 
     return users;
   }

@@ -9,9 +9,9 @@ interface ICreateUserDTO {
 }
 
 interface IUsersRepository {
-  findByEmail(name: string): User | undefined;
-  list(): User[];
-  create({ name, email, password }: ICreateUserDTO): void;
+  findByEmail(name: string): Promise<User | undefined>;
+  list(): Promise<User[]>;
+  create({ name, email, password }: ICreateUserDTO): Promise<void>;
 }
 
 export { IUsersRepository, ICreateUserDTO };

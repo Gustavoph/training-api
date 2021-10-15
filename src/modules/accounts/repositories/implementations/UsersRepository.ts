@@ -1,44 +1,28 @@
 import { User } from '../../entities/User';
 import { ICreateUserDTO, IUsersRepository } from '../IUsersRepository';
 
+import { getRepository, Repository } from 'typeorm';
+
 class UsersRepository implements IUsersRepository {
-  private users: User[];
+  private repository: Repository<User>;
 
-  private static INSTANCE: UsersRepository;
-
-  // singleton
-  private constructor() {
-    this.users = [];
+  constructor() {
+    this.repository = getRepository(User);
   }
 
-  public static getInstance(): UsersRepository {
-    if (!UsersRepository.INSTANCE) {
-      UsersRepository.INSTANCE = new UsersRepository();
-    }
+  async create({ name, email, password }: ICreateUserDTO): Promise<void> {
+    const user = this.repository.create({ name, email, password });
 
-    return UsersRepository.INSTANCE;
+    await this.repository.save(user);
   }
 
-  create({ name, email, password }: ICreateUserDTO): void {
-    const user = new User();
-
-    Object.assign(user, {
-      name,
-      email,
-      password,
-      admin: false,
-      createdAt: new Date(),
-    });
-
-    this.users.push(user);
+  async list(): Promise<User[]> {
+    const users = await this.repository.find();
+    return users;
   }
 
-  list(): User[] {
-    return this.users;
-  }
-
-  findByEmail(email: string): User | undefined {
-    const user = this.users.find((user) => user.email === email);
+  async findByEmail(email: string): Promise<User | undefined> {
+    const user = this.repository.findOne({ email: email });
 
     return user;
   }

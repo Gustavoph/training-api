@@ -1,15 +1,20 @@
 {
-  "name": "api-escola",
+  "name": "training-api",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts"
+    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
+    "typeorm": "tsnd ./node_modules/typeorm/cli"
   },
   "dependencies": {
     "@types/express": "^4.17.13",
     "express": "^4.17.1",
+    "mongodb": "^3.6.0",
+    "reflect-metadata": "^0.1.13",
     "ts-node-dev": "^1.1.8",
+    "tsyringe": "^4.6.0",
+    "typeorm": "^0.2.38",
     "typescript": "^4.4.3",
     "uuid": "^8.3.2"
   },
